@@ -1,0 +1,18 @@
+# Ignored when building Docker image (matches .gitignore plus build artifacts)
+node_modules
+.next
+out
+build
+.git
+.gitignore
+.env*
+!.env.example
+README.md
+DEPLOY.md
+.vercel
+.DS_Store
+*.log
+.vscode
+.idea
+coverage
+*.tsbuildinfo

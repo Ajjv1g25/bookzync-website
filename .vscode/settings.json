@@ -1,0 +1,41 @@
+{
+  // Use the project's TypeScript version, not VS Code's bundled one
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+
+  // Tailwind v4 IntelliSense
+  "tailwindCSS.experimental.classRegex": [
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["className\\s*=\\s*[\"']([^\"']*)[\"']", "([^\\s]+)"]
+  ],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+
+  // Format on save with Prettier-like behavior (uses ESLint config)
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // Trim whitespace, ensure final newline
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Hide build artifacts from the file tree
+  "files.exclude": {
+    "**/.next": true,
+    "**/node_modules": true,
+    "**/.DS_Store": true,
+    "**/*.tsbuildinfo": true
+  },
+
+  // Searches skip build output
+  "search.exclude": {
+    "**/.next": true,
+    "**/node_modules": true,
+    "**/package-lock.json": true
+  }
+}

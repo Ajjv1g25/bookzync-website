@@ -1,0 +1,378 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Dark mode variant — driven by `.dark` class on <html>
+   (next-themes handles toggling)
+   ============================================================ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   Design tokens — semantic CSS variables
+   Light mode is the default; dark mode overrides
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --bg: 0 0% 100%;                  /* page background */
+  --bg-subtle: 220 14% 98%;         /* subtle section background */
+  --surface: 0 0% 100%;             /* card surface */
+  --surface-elevated: 0 0% 100%;    /* elevated card */
+  --surface-inverse: 222 47% 7%;    /* dark surface used in hero/CTAs */
+
+  /* Text */
+  --text: 222 47% 8%;               /* primary */
+  --text-muted: 220 9% 40%;         /* secondary */
+  --text-subtle: 220 9% 55%;        /* tertiary */
+  --text-inverse: 0 0% 100%;        /* on dark surfaces */
+
+  /* Borders */
+  --border: 220 13% 91%;
+  --border-strong: 220 13% 82%;
+  --border-inverse: 220 30% 18%;    /* on dark surfaces */
+
+  /* Brand */
+  --brand: 188 94% 42%;             /* #06B6D4 cyan */
+  --brand-hover: 191 91% 36%;       /* #0891B2 */
+  --brand-glow: 188 94% 50%;
+
+  /* Industry accents */
+  --accent-dental: 188 94% 42%;     /* cyan */
+  --accent-medical: 217 91% 60%;    /* blue #3B82F6 */
+  --accent-salon: 38 92% 50%;       /* amber #F59E0B */
+  --accent-gym: 21 94% 53%;         /* orange #F97316 */
+
+  /* Effects */
+  --ring: 188 94% 42%;
+  --grid-line: 220 13% 91%;          /* used by .bg-grid */
+  --shadow-soft: 0 1px 2px hsl(220 40% 10% / 0.04), 0 4px 16px -4px hsl(220 40% 10% / 0.06);
+  --shadow-card: 0 1px 2px hsl(220 40% 10% / 0.04), 0 8px 24px -8px hsl(220 40% 10% / 0.08);
+  --shadow-lifted: 0 1px 2px hsl(220 40% 10% / 0.04), 0 20px 40px -16px hsl(220 40% 10% / 0.16);
+  --shadow-glow: 0 0 0 1px hsl(var(--brand) / 0.15), 0 8px 32px -8px hsl(var(--brand-glow) / 0.35);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 222 47% 5%;
+  --bg-subtle: 222 47% 7%;
+  --surface: 222 35% 9%;
+  --surface-elevated: 222 30% 12%;
+  --surface-inverse: 222 47% 5%;
+
+  --text: 0 0% 98%;
+  --text-muted: 220 13% 70%;
+  --text-subtle: 220 13% 55%;
+  --text-inverse: 222 47% 8%;
+
+  --border: 222 30% 16%;
+  --border-strong: 222 25% 22%;
+  --border-inverse: 220 13% 91%;
+
+  /* Brand slightly brighter on dark for that glow feel */
+  --brand: 188 94% 50%;
+  --brand-hover: 188 100% 60%;
+  --brand-glow: 188 100% 55%;
+
+  --ring: 188 94% 55%;
+  --grid-line: 222 30% 16%;
+  --shadow-soft: 0 1px 2px hsl(0 0% 0% / 0.4), 0 4px 16px -4px hsl(0 0% 0% / 0.4);
+  --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.4), 0 8px 24px -8px hsl(0 0% 0% / 0.5);
+  --shadow-lifted: 0 1px 2px hsl(0 0% 0% / 0.4), 0 20px 40px -16px hsl(0 0% 0% / 0.6);
+  --shadow-glow: 0 0 0 1px hsl(var(--brand) / 0.25), 0 8px 40px -8px hsl(var(--brand-glow) / 0.5);
+
+  color-scheme: dark;
+}
+
+/* ============================================================
+   Tailwind @theme — expose tokens as utilities
+   ============================================================ */
+@theme inline {
+  /* Fonts (variables come from next/font in layout.tsx) */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Colors */
+  --color-bg: hsl(var(--bg));
+  --color-bg-subtle: hsl(var(--bg-subtle));
+  --color-surface: hsl(var(--surface));
+  --color-surface-elevated: hsl(var(--surface-elevated));
+  --color-surface-inverse: hsl(var(--surface-inverse));
+
+  --color-text: hsl(var(--text));
+  --color-text-muted: hsl(var(--text-muted));
+  --color-text-subtle: hsl(var(--text-subtle));
+  --color-text-inverse: hsl(var(--text-inverse));
+
+  --color-border: hsl(var(--border));
+  --color-border-strong: hsl(var(--border-strong));
+  --color-border-inverse: hsl(var(--border-inverse));
+
+  --color-brand: hsl(var(--brand));
+  --color-brand-hover: hsl(var(--brand-hover));
+  --color-brand-glow: hsl(var(--brand-glow));
+
+  --color-accent-dental: hsl(var(--accent-dental));
+  --color-accent-medical: hsl(var(--accent-medical));
+  --color-accent-salon: hsl(var(--accent-salon));
+  --color-accent-gym: hsl(var(--accent-gym));
+
+  --color-ring: hsl(var(--ring));
+
+  /* Radii */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  /* Typography scale — tuned for marketing display sizes */
+  --text-display-2xl: 4.5rem;
+  --text-display-2xl--line-height: 1;
+  --text-display-2xl--letter-spacing: -0.04em;
+  --text-display-xl: 3.75rem;
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-lg: 3rem;
+  --text-display-lg--line-height: 1.05;
+  --text-display-lg--letter-spacing: -0.03em;
+  --text-display-md: 2.25rem;
+  --text-display-md--line-height: 1.1;
+  --text-display-md--letter-spacing: -0.025em;
+}
+
+/* ============================================================
+   Base layer — site-wide defaults
+   ============================================================ */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    /* `clip` visually clips horizontal overflow WITHOUT creating a scroll
+       container — unlike `hidden`, which implicitly turns overflow-y into
+       `auto` and breaks mouse-wheel propagation. */
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: hsl(var(--bg));
+    color: hsl(var(--text));
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: hsl(var(--brand) / 0.25);
+    color: hsl(var(--text));
+  }
+
+  /* Focus rings — visible only on keyboard focus */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Smooth color-scheme transitions when toggling */
+  html.color-scheme-transitioning,
+  html.color-scheme-transitioning *,
+  html.color-scheme-transitioning *::before,
+  html.color-scheme-transitioning *::after {
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, fill 0.25s ease, stroke 0.25s ease !important;
+    transition-delay: 0 !important;
+  }
+
+  /* Reduced motion — respect user preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================
+   Custom utilities — site-specific patterns
+   ============================================================ */
+@layer utilities {
+  /* Gradient text — brand cyan */
+  .text-gradient-brand {
+    background: linear-gradient(135deg, hsl(var(--brand)) 0%, hsl(188 100% 70%) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Subtle background grid — auto-switches via --grid-line variable */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--grid-line) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid-line) / 0.6) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Dotted background */
+  .bg-dots {
+    background-image: radial-gradient(hsl(var(--border-strong) / 0.6) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Fade-out mask for grids/scrolling content */
+  .mask-radial-faded {
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%);
+  }
+
+  .mask-fade-edges {
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  }
+
+  /* Shadows */
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-lifted { box-shadow: var(--shadow-lifted); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+
+  /* Glass surface */
+  .glass {
+    background: hsl(var(--surface) / 0.7);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+
+  /* ============================================================
+     iOS-style Liquid Glass
+     Multi-layer composition: backdrop blur + saturation boost,
+     semi-transparent base, specular top highlight, prismatic
+     border, inner highlight, and an outer lift shadow.
+     Apply .liquid-glass to a positioned element (rounded recommended).
+     ============================================================ */
+  .liquid-glass {
+    position: relative;
+    background: hsl(var(--surface) / 0.45);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.35) inset,           /* top inner highlight */
+      0 -1px 0 0 hsl(0 0% 0% / 0.05) inset,            /* bottom inner shadow */
+      0 1px 1px 0 hsl(0 0% 100% / 0.5) inset,          /* tiny crisp light edge */
+      0 12px 32px -12px hsl(220 40% 10% / 0.18),       /* lift shadow */
+      0 4px 12px -4px hsl(220 40% 10% / 0.08);         /* contact shadow */
+  }
+  .dark .liquid-glass {
+    background: hsl(220 30% 14% / 0.55);
+    box-shadow:
+      0 1px 0 0 hsl(0 0% 100% / 0.08) inset,
+      0 -1px 0 0 hsl(0 0% 0% / 0.4) inset,
+      0 1px 1px 0 hsl(0 0% 100% / 0.12) inset,
+      0 16px 40px -12px hsl(0 0% 0% / 0.6),
+      0 4px 12px -4px hsl(0 0% 0% / 0.4);
+  }
+
+  /* Specular highlight overlay — apply as ::before or a child div */
+  .liquid-glass-highlight {
+    background: linear-gradient(
+      180deg,
+      hsl(0 0% 100% / 0.22) 0%,
+      hsl(0 0% 100% / 0.06) 20%,
+      hsl(0 0% 100% / 0) 50%,
+      hsl(0 0% 100% / 0) 100%
+    );
+  }
+  .dark .liquid-glass-highlight {
+    background: linear-gradient(
+      180deg,
+      hsl(0 0% 100% / 0.1) 0%,
+      hsl(0 0% 100% / 0.02) 25%,
+      hsl(0 0% 100% / 0) 55%,
+      hsl(0 0% 100% / 0) 100%
+    );
+  }
+
+  /* Prismatic gradient border — sits on top with a mask cut-out */
+  .liquid-glass-border {
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      hsl(0 0% 100% / 0.6) 0%,
+      hsl(0 0% 100% / 0.15) 25%,
+      hsl(0 0% 100% / 0) 50%,
+      hsl(0 0% 100% / 0.05) 75%,
+      hsl(0 0% 100% / 0.3) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  .dark .liquid-glass-border {
+    background: linear-gradient(
+      135deg,
+      hsl(0 0% 100% / 0.25) 0%,
+      hsl(0 0% 100% / 0.05) 25%,
+      hsl(0 0% 100% / 0) 50%,
+      hsl(0 0% 100% / 0.03) 75%,
+      hsl(0 0% 100% / 0.15) 100%
+    );
+  }
+}
+
+/* ============================================================
+   Keyframes — used by hero & accent elements
+   ============================================================ */
+@keyframes drift-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(40px, -30px, 0) scale(1.05); }
+}
+
+@keyframes drift-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-50px, 40px, 0) scale(0.95); }
+}
+
+@keyframes drift-3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(30px, 50px, 0) scale(1.08); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-drift-1 { animation: drift-1 18s ease-in-out infinite; }
+.animate-drift-2 { animation: drift-2 22s ease-in-out infinite; }
+.animate-drift-3 { animation: drift-3 20s ease-in-out infinite; }
+.animate-pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+.animate-marquee { animation: marquee 40s linear infinite; }
