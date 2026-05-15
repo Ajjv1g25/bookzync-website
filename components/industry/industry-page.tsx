@@ -323,15 +323,17 @@ function IndustryProblems({ cfg }: { cfg: IndustryConfig }) {
                     filter: "blur(20px)",
                   }}
                 />
-                <h3 className="text-lg font-semibold text-text">{p.title}</h3>
-                <div className="mt-4 flex items-baseline gap-2 border-y border-border py-4">
+                <h3 className="text-lg font-semibold leading-snug text-text">{p.title}</h3>
+                <div className="mt-4 flex items-baseline gap-3 border-y border-border py-4">
                   <span
-                    className="font-mono text-3xl font-semibold tracking-tight"
+                    className="flex-shrink-0 whitespace-nowrap font-mono text-[1.75rem] font-semibold leading-none tracking-tight sm:text-3xl"
                     style={{ color: cfg.accentHex }}
                   >
                     {p.stat}
                   </span>
-                  <span className="text-xs text-text-muted">{p.statLabel}</span>
+                  <span className="min-w-0 text-xs leading-snug text-text-muted">
+                    {p.statLabel}
+                  </span>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-text-muted">
                   {p.body}
