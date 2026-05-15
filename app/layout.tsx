@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "BookZync — Smarter front desk. Fuller calendar.",
+    default: "BookZync",
     template: "%s · BookZync",
   },
   description:
